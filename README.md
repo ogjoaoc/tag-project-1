@@ -30,7 +30,7 @@ O projeto consiste na aplicação prática dos conceitos lecionados durante o pr
 
 ---
 
-## Vizualização
+## Visualização
 
 
 ---
