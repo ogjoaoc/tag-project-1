@@ -4,6 +4,30 @@ from collections import defaultdict
 
 MAX_NODOS = -1
 
+''' 
+2*ti / (n *(n-1))
+med = sum(d(vi))/max_nodos
+'''
+def coef_aglomeracao(adj, v):
+    
+    qtd_vizinhos = len(adj[v])
+
+    if qtd_vizinhos < 2:  
+        return 0.0
+    
+    entre_vizinho = 0
+
+    for x in adj[v]:
+        for y in adj[v]:
+            if x != y and x in adj[y] and y in adj[v]:
+                entre_vizinho += 1
+
+    return entre_vizinho / ((qtd_vizinhos) * (qtd_vizinhos - 1))
+
+def coef_aglomeracao_medio(adj):
+
+    return sum(coef_aglomeracao(adj, v) for v in range(1, MAX_NODOS + 1)) / MAX_NODOS
+
 def grau_por_vertice(adj):
     
     tabela = defaultdict(int)
@@ -30,5 +54,10 @@ MAX_NODOS = len(grafo.nodes())
 
 lista_de_adj = inicializar_lista_adj(grafo)
 tabela_graus_por_vertice = grau_por_vertice(lista_de_adj)
+
+print(lista_de_adj)
+print(coef_aglomeracao(lista_de_adj, 34))
+print(coef_aglomeracao_medio(lista_de_adj))
+print(nx.average_clustering(grafo))
 
 
