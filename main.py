@@ -1,13 +1,12 @@
 import networkx as nx
+import random
+import matplotlib.pyplot as plt
 from scipy.io import mmread
 from collections import defaultdict
 
+
 MAX_NODOS = -1        # Variável global para o número máximo de nós no grafo.
 
-''' 
-2*ti / (n *(n-1))
-med = sum(d(vi))/max_nodos
-'''
 def coef_aglomeracao(adj, v):         # Calcula o coeficiente de aglomeração para o vértice v.
     
     qtd_vizinhos = len(adj[v])        # Número de vizinhos do vértice.
@@ -48,7 +47,7 @@ def inicializar_lista_adj(G):        # Contrução de uma lista de adjacências 
 
     return adj
 
-def visualizar_grafo_com_cliques(grafo, cliques):    # Gerar uma visualizaação do grafo com cliques destacados com cores.
+def visualizar_grafo_com_cliques(grafo, cliques):    # Gerar uma visualização do grafo com cliques destacados com cores.
 
     pos = nx.spring_layout(grafo)   # Definir um layout para posicionar os nós no grafo. 
     
@@ -56,9 +55,10 @@ def visualizar_grafo_com_cliques(grafo, cliques):    # Gerar uma visualizaação
                     for _ in range(len(cliques))]    # Gerar cores únicas para cada clique maximal.
 
     colors = {}
+
     for i, clique in enumerate(cliques):    # Mapear as cores para os nós, com uma cor padrão para nós fora de cliques.
         for node in clique:
-            colors[node] = clique
+            colors[node] = clique_colors[i]
 
     default_color = "#cccccc"        # Definição cor padrão (cinza) para nós que não pertencem a cliques destacados
     node_colors = [colors.get(node, default_color) for node in grafo.nodes()]
