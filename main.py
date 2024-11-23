@@ -6,17 +6,11 @@ from collections import defaultdict
 from os import system, name
 
 
-MAX_NODOS = -1        # Variável global para o número máximo de nós no grafo.
 
-def menu():
-    from menu import inicio  
-    inicio()
+def print_coef_alomeracao_por_vertice():
 
-def limpar_terminal():
-    if name == 'nt':
-        _ = system('cls')
-    else:
-        _ = system('clear')
+    for i in range(1, MAX_NODOS + 1):
+        print(f'Vértice: {i} - {coef_aglomeracao(lista_de_adj, i)}')
 
 def coef_aglomeracao(adj, v):         # Calcula o coeficiente de aglomeração para o vértice v.
     
@@ -62,15 +56,14 @@ def visualizar_grafo_com_cliques(grafo, cliques):    # Gerar uma visualização 
 
     pos = nx.spring_layout(grafo)   # Definir um layout para posicionar os nós no grafo. 
     
-    clique_colors = [f"#{random.randint(0, 0xFFFFFF):06x}"
-                    for _ in range(len(cliques))]    # Gerar cores únicas para cada clique maximal.
+    clique_colors = [f"#{random.randint(0, 0xFFFFFF):06x}" for _ in range(len(cliques))]    # Gerar cores únicas para cada clique maximal.
 
     colors = {}
 
-    for i, clique in enumerate(cliques):    # Mapear as cores para os nós, com uma cor padrão para nós fora de cliques.
-        for node in clique:
-            colors[node] = clique_colors[i]
-
+    for i in range(len(cliques)):   # Mapear as cores para os nós, com uma cor padrão para nós fora de cliques.
+        for no in cliques[i]:
+            colors[no] = clique_colors[i]
+            
     default_color = "#cccccc"        # Definição cor padrão (cinza) para nós que não pertencem a cliques destacados
     node_colors = [colors.get(node, default_color) for node in grafo.nodes()]
 
@@ -83,9 +76,38 @@ def visualizar_grafo_com_cliques(grafo, cliques):    # Gerar uma visualização 
         node_size=500,
         font_size=10,
     )
+
     plt.title("Grafo com Cliques Destacados")
     plt.show()
 
+def menu():
+    from menu import inicio  
+    inicio()
+
+def limpar_terminal():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
+
+def encontrar_cliques_maximais(grafo):    # Função para os cliques maximais
+    
+    """
+    Exibir todos os cliques maximais no grafo.
+    grafo (networkx.Graph): Grafo carregado no NetworkX.
+    list: Lista de cliques maximais, onde cada clique é representado por uma lista de nós.
+    """
+
+    cliques_maximais = list(nx.find_cliques(grafo))    # Encontrar os cliques maximais usando NetworkX
+
+    print("\nCliques Maximais:")   # Exibição dos cliques encontrados.
+
+    for i, clique in enumerate(cliques_maximais, start=1):
+        print(f"Clique {i} ({len(clique)} vértices): {clique}")
+
+    return cliques_maximais
+
+MAX_NODOS = -1        # Variável global para o número máximo de nós no grafo.
 matriz = mmread("soc-dolphins\\soc-dolphins.mtx")    # Carrega a matriz do arquivo no formato Matrix Market.
 grafo = nx.Graph(matriz)     # Construção do grafo usando NetworkX.
 MAX_NODOS = len(grafo.nodes())    # Definição do número total de nós.
@@ -93,28 +115,8 @@ MAX_NODOS = len(grafo.nodes())    # Definição do número total de nós.
 lista_de_adj = inicializar_lista_adj(grafo) # Construção da Lista de adjacências.
 tabela_graus_por_vertice = grau_por_vertice(lista_de_adj)    # Cálculo dos graus de cada vértice.
 
-# print(lista_de_adj) # Impressão da lista de Adjacências
-# print(coef_aglomeracao(lista_de_adj, 34)) # Impressão do vértice 34 e seu coeficiente de aglomeração.
-# print(coef_aglomeracao_medio(lista_de_adj)) # Impressão do coeficiente de aglomeração médio. 
-# print(nx.average_clustering(grafo)) # Impressão do coeficiente médio.
-
-def encontrar_cliques_maximais(grafo):    # Função para os cliques maximais
-    """
-    Exibir todos os cliques maximais no grafo.
-    grafo (networkx.Graph): Grafo carregado no NetworkX.
-    list: Lista de cliques maximais, onde cada clique é representado por uma lista de nós.
-    """
-    
-    cliques_maximais = list(nx.find_cliques(grafo))    # Encontrar os cliques maximais usando NetworkX
-
-    print("\nCliques Maximais:") # Exibição dos cliques encontrados.
-
-    for i, clique in enumerate(cliques_maximais, start=1):
-        print(f"Clique {i} ({len(clique)} vértices): {clique}")
-
-    return cliques_maximais
-
 if __name__ == "__main__":
+    
     menu() 
 
 

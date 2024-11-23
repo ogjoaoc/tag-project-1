@@ -13,8 +13,8 @@ def inicio():
         print("(5) Visualização do grafo completo.")
         print("(6) Sair.")
         
-        print()
-        opcao = int(input("Selecione a opção desejada: "))
+        print("Selecione a opção desejada: ")
+        opcao = int(input())
         limpar_terminal()
 
         match opcao:
@@ -23,13 +23,11 @@ def inicio():
             case 2:
                 encontrar_cliques_maximais(grafo)
             case 3:
-                for i in range(1, MAX_NODOS + 1):
-                    print(f'Vértice: {i} - {coef_aglomeracao(lista_de_adj, i)}')
+                print_coef_alomeracao_por_vertice()
             case 4:
                 print(coef_aglomeracao_medio(lista_de_adj))
             case 5:
-                cliques_maximais = encontrar_cliques_maximais(grafo) # Encontrar os cliques maximais no grafo
-                visualizar_grafo_com_cliques(grafo, cliques_maximais) # Visualização do grafo com os cliques destacados.
+                visualizar_grafo_com_cliques(grafo, encontrar_cliques_maximais(grafo)) # Visualização do grafo com os cliques destacados.
             case 6:
                 break
             case _:
