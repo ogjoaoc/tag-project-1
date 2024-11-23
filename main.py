@@ -3,9 +3,20 @@ import random
 import matplotlib.pyplot as plt
 from scipy.io import mmread
 from collections import defaultdict
+from os import system, name
 
 
 MAX_NODOS = -1        # Variável global para o número máximo de nós no grafo.
+
+def menu():
+    from menu import inicio  
+    inicio()
+
+def limpar_terminal():
+    if name == 'nt':
+        _ = system('cls')
+    else:
+        _ = system('clear')
 
 def coef_aglomeracao(adj, v):         # Calcula o coeficiente de aglomeração para o vértice v.
     
@@ -82,10 +93,10 @@ MAX_NODOS = len(grafo.nodes())    # Definição do número total de nós.
 lista_de_adj = inicializar_lista_adj(grafo) # Construção da Lista de adjacências.
 tabela_graus_por_vertice = grau_por_vertice(lista_de_adj)    # Cálculo dos graus de cada vértice.
 
-print(lista_de_adj) # Impressão da lista de Adjacências
-print(coef_aglomeracao(lista_de_adj, 34)) # Impressão do vértice 34 e seu coeficiente de aglomeração.
-print(coef_aglomeracao_medio(lista_de_adj)) # Impressão do coeficiente de aglomeração médio. 
-print(nx.average_clustering(grafo)) # Impressão do coeficiente médio.
+# print(lista_de_adj) # Impressão da lista de Adjacências
+# print(coef_aglomeracao(lista_de_adj, 34)) # Impressão do vértice 34 e seu coeficiente de aglomeração.
+# print(coef_aglomeracao_medio(lista_de_adj)) # Impressão do coeficiente de aglomeração médio. 
+# print(nx.average_clustering(grafo)) # Impressão do coeficiente médio.
 
 def encontrar_cliques_maximais(grafo):    # Função para os cliques maximais
     """
@@ -103,6 +114,9 @@ def encontrar_cliques_maximais(grafo):    # Função para os cliques maximais
 
     return cliques_maximais
 
-cliques_maximais = encontrar_cliques_maximais(grafo) # Encontrar os cliques maximais no grafo.
+if __name__ == "__main__":
+    menu() 
 
-visualizar_grafo_com_cliques(grafo, cliques_maximais) # Visualização do grafo com os cliques destacados.
+
+
+
