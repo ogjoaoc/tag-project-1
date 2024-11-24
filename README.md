@@ -27,8 +27,8 @@ A aplicação trabalha com os dados da base soc-dolphins, um grafo que represent
 
  1. Clone este repositório para a sua máquina local:
     ```bash
-    git clone https:github.com/seu-repositorio/projeto-teoria-grafos.git
-    cd projeto-teoria-grafos
+    git clone [https:github.com/seu-repositorio/projeto-teoria-grafos.git](https://github.com/ogjoaoc/tag-project-1.git)
+    cd tag-project-1
     ```
 
  2. Instale as dependências do projeto:
