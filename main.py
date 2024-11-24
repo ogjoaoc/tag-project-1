@@ -14,6 +14,26 @@ Autores: João Carlos (232009511) e Ricardo Nabuco (231021360).
 Professor: Díbio.
 '''
 
+def inicializar_lista_adj(G):               # Contrução de uma lista de adjacências a partir do grafo.
+    
+    adj = [[] for _ in range(MAX_NODOS + 1)]        
+    
+    for aresta in G.edges():                # Adiciona as conexões de cada aresta à lista de adjacências.
+        u, v = aresta[0], aresta[1]
+        adj[u + 1].append(v + 1)
+        adj[v + 1].append(u + 1)
+
+    return adj
+
+def grau_por_vertice(adj):                  # Calcula o grau de cada vértice.
+    
+    tabela = defaultdict(int)               # Dicionário com o grau de cada vértice. 
+
+    for nodo in range(1, MAX_NODOS + 1):    # Conta o número de vizinhos de cada vértice.
+        tabela[nodo] = len(adj[nodo])
+        
+    return tabela
+
 def bron_kerbosch(C, P, E, cliques):
 
     '''
@@ -34,10 +54,17 @@ def bron_kerbosch(C, P, E, cliques):
         P.remove(candidato)
         E.add(candidato)
 
-def print_coef_alomeracao_por_vertice():    # Módulo para impressão dos vértices e seus respectivos coeficientes de aglomeração.
+def encontrar_cliques_maximais(grafo):      # Função para encontrar os cliques maximais utilizando o Algoritmo de Bron Kerbosch.
 
-    for i in range(1, MAX_NODOS + 1):
-        print(f'Vértice: {i} - {coef_aglomeracao(lista_de_adj, i)}')
+    cliques_maximais = []
+    bron_kerbosch(set(), set(grafo.nodes()), set(), cliques_maximais)  
+
+    print("\nCliques Maximais:")   
+
+    for i in range(0, len(cliques_maximais)):
+        print(f"Clique {i + 1} ({len(cliques_maximais[i])} vértices): {cliques_maximais[i]}")
+    
+    return cliques_maximais
 
 def coef_aglomeracao(adj, v):               # Calcula o coeficiente de aglomeração para o vértice v.
     
@@ -59,25 +86,10 @@ def coef_aglomeracao_medio(adj):            # Função para calcular o coeficien
 
     return sum(coef_aglomeracao(adj, v) for v in range(1, MAX_NODOS + 1)) / MAX_NODOS  
 
-def grau_por_vertice(adj):                  # Calcula o grau de cada vértice.
-    
-    tabela = defaultdict(int)               # Dicionário com o grau de cada vértice. 
+def print_coef_alomeracao_por_vertice():    # Módulo para impressão dos vértices e seus respectivos coeficientes de aglomeração.
 
-    for nodo in range(1, MAX_NODOS + 1):    # Conta o número de vizinhos de cada vértice.
-        tabela[nodo] = len(adj[nodo])
-        
-    return tabela
-
-def inicializar_lista_adj(G):               # Contrução de uma lista de adjacências a partir do grafo.
-    
-    adj = [[] for _ in range(MAX_NODOS + 1)]        
-    
-    for aresta in G.edges():                # Adiciona as conexões de cada aresta à lista de adjacências.
-        u, v = aresta[0], aresta[1]
-        adj[u + 1].append(v + 1)
-        adj[v + 1].append(u + 1)
-
-    return adj
+    for i in range(1, MAX_NODOS + 1):
+        print(f'Vértice: {i} - {coef_aglomeracao(lista_de_adj, i)}')
 
 def visualizar_grafo_com_cliques(grafo, cliques):    
 
@@ -110,18 +122,6 @@ def limpar_terminal():                     # Módulo para flush do terminal.
     else:
         _ = system('clear')
 
-def encontrar_cliques_maximais(grafo):      # Função para encontrar os cliques maximais utilizando o Algoritmo de Bron Kerbosch
-
-    cliques_maximais = []
-    bron_kerbosch(set(), set(grafo.nodes()), set(), cliques_maximais)  
-
-    print("\nCliques Maximais:")   
-
-    for i in range(0, len(cliques_maximais)):
-        print(f"Clique {i + 1} ({len(cliques_maximais[i])} vértices): {cliques_maximais[i]}")
-    
-    return cliques_maximais
-
 
 
 matriz = mmread("soc-dolphins\\soc-dolphins.mtx")    # Carrega a matriz do arquivo.
@@ -136,7 +136,6 @@ tabela_graus_por_vertice = grau_por_vertice(lista_de_adj)    # Cálculo dos grau
 
 if __name__ == "__main__":
     menu() 
-
 
 
 
