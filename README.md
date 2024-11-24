@@ -1,4 +1,4 @@
-# Teoria e Aplicação de Grafos - Projeto 1
+# Teoria e Aplicação de Grafos - Projeto 1.
 
 ---
 
