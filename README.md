@@ -23,7 +23,7 @@ A aplicação trabalha com os dados da base soc-dolphins, um grafo que represent
 
  ### Pré-requisitos
 
-  Com o o Python 3.9+ instalado:
+  Com o Python 3.9+ instalado:
 
  1. Clone este repositório para a sua máquina local:
     ```bash
