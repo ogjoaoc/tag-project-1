@@ -32,7 +32,8 @@ def grau_por_vertice(adj):                  # Calcula o grau de cada vértice.
     for nodo in range(1, MAX_NODOS + 1):    # Conta o número de vizinhos de cada vértice.
         tabela[nodo] = len(adj[nodo])
         
-    return tabela
+    for nodo, grau in tabela.items():
+        print(f"Vértice: {nodo} - Grau: {tabela[nodo]}")
 
 def bron_kerbosch(C, P, E, cliques):
 
@@ -89,7 +90,7 @@ def coef_aglomeracao_medio(adj):            # Função para calcular o coeficien
 def print_coef_alomeracao_por_vertice():    # Módulo para impressão dos vértices e seus respectivos coeficientes de aglomeração.
 
     for i in range(1, MAX_NODOS + 1):
-        print(f'Vértice: {i} - {coef_aglomeracao(lista_de_adj, i)}')
+        print(f'Vértice: {i} - Coeficiente: {coef_aglomeracao(lista_de_adj, i)}')
 
 def visualizar_grafo_com_cliques(grafo, cliques):    
 

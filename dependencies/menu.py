@@ -41,7 +41,7 @@ def inicio():
 
         match opcao:
             case 1:
-                print(tabela_graus_por_vertice)
+                grau_por_vertice(lista_de_adj)
             case 2:
                 encontrar_cliques_maximais(grafo)
             case 3:
