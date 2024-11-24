@@ -33,7 +33,7 @@ A aplicação trabalha com os dados da base soc-dolphins, um grafo que represent
 
  2. Instale as dependências do projeto:
     ```bash
-    pip install -r setup.txt
+    pip install -r dependencies/setup.txt
     ```
 ### Executando o Projeto
 
