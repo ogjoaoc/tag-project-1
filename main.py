@@ -133,8 +133,6 @@ MAX_NODOS = len(grafo.nodes())              # Definição do número total de n�
 
 lista_de_adj = inicializar_lista_adj(grafo) # Construção da Lista de adjacências.
 
-tabela_graus_por_vertice = grau_por_vertice(lista_de_adj)    # Cálculo dos graus de cada vértice.
-
 if __name__ == "__main__":
     menu() 
 
