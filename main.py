@@ -41,7 +41,7 @@ def bron_kerbosch(C, P, E, cliques):
     Algoritmo de Bron-Kerborsch:
     C - Vértices do clique que está sendo feito.
     P - Candidatos a participar do clique
-    X - Nós que já foram processados.
+    E - Nós que já foram processados.
     cliques - Lista com os cliques maximais.
     Fonte: slides da disciplina (Aula 5).
     '''
